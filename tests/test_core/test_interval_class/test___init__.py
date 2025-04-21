@@ -1,6 +1,9 @@
+import math
+
 from hypothesis import given, strategies as st
 
 from anterval import Interval
+
 
 @given(
     a=st.integers(),
@@ -13,6 +16,8 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
     end = max(a, b)
     assert isinstance(start, int)
     assert isinstance(end, int)
+    assert isinstance(left_closed, bool)
+    assert isinstance(right_closed, bool)
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
@@ -26,6 +31,7 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
     assert interval.right_closed == right_closed
     assert interval.start <= interval.end
 
+
 @given(
     a=st.floats(),
     b=st.floats(),
@@ -35,16 +41,23 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
 def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> None:
     start = min(a, b)
     end = max(a, b)
+    assert isinstance(left_closed, bool)
+    assert isinstance(right_closed, bool)
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
     assert isinstance(interval.start, float)
     assert isinstance(interval.end, float)
-    assert (interval.start == start) or (interval.start == float('nan'))
-    assert (interval.end == end) or (interval.end == float('nan'))
+    assert (interval.start == start) or (
+        math.isnan(interval.start) and math.isnan(start)
+    )
+    assert (interval.end == end) or (math.isnan(interval.end) and math.isnan(end))
     assert interval.left_closed == left_closed
     assert interval.right_closed == right_closed
-    assert interval.start <= interval.end
+    assert (interval.start <= interval.end) or (
+        math.isnan(interval.end) and math.isnan(end)
+    )
+
 
 @given(
     a=st.text(),
@@ -53,13 +66,20 @@ def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> No
     right_closed=st.booleans(),
 )
 def test_text(a: str, b: str, left_closed: bool, right_closed: bool) -> None:
+    assert isinstance(left_closed, bool)
+    assert isinstance(right_closed, bool)
+
     start = min(a, b)
     end = max(a, b)
+
+    assert start <= end
+
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
     assert interval.start == start
     assert interval.end == end
+    assert interval.start <= interval.end
     assert interval.left_closed == left_closed
     assert interval.right_closed == right_closed
     assert interval.start <= interval.end
