@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-
-from typing import TypeVar, Generic, override
+from typing import Generic, TypeVar, override
 
 T = TypeVar("T")
 
@@ -14,8 +13,7 @@ class Interval(Generic[T]):
         left_closed: bool = True,
         right_closed: bool = False,
     ) -> None:
-        """
-        Initializes the Interval.
+        """Initializes the Interval.
 
         Args:
             start: Start of the interval.
@@ -25,6 +23,7 @@ class Interval(Generic[T]):
 
         Raises:
             ValueError: If the interval boundaries are invalid.
+
         """
         if start > end or (start == end and (not left_closed or not right_closed)):
             raise ValueError("Invalid interval boundaries.")
@@ -41,14 +40,14 @@ class Interval(Generic[T]):
         return f"{left_bracket}{self.start}, {self.end}{right_bracket}"
 
     def contains(self, value: T) -> bool:
-        """
-        Checks if a given value is within the interval.
+        """Checks if a given value is within the interval.
 
         Args:
             value: The value to check.
 
         Returns:
             bool: True if the value is within the interval, False otherwise.
+
         """
         left_check: bool = value > self.start or (
             self.left_closed and value == self.start
@@ -59,17 +58,17 @@ class Interval(Generic[T]):
         return left_check and right_check
 
     def intersection(self, other: Interval[T]) -> Interval[T] | None:
-        """
-        Returns the intersection of this interval with another.
+        """Returns the intersection of this interval with another.
 
         Args:
             other: The other interval.
 
         Returns:
             Optional[Interval[T]]: The intersection interval, or None if they don't overlap.
+
         """
         new_start = max(
-            (self.start, self.left_closed), (other.start, other.left_closed)
+            (self.start, self.left_closed), (other.start, other.left_closed),
         )
         new_end = min((self.end, self.right_closed), (other.end, other.right_closed))
         if new_start[0] < new_end[0] or (
@@ -79,14 +78,14 @@ class Interval(Generic[T]):
         return None
 
     def union(self, other: Interval[T]) -> Interval[T] | None:
-        """
-        Returns the union of this interval with another if they overlap or are contiguous.
+        """Returns the union of this interval with another if they overlap or are contiguous.
 
         Args:
             other: The other interval.
 
         Returns:
             Optional[Interval[T]]: The union interval, or None if they don't overlap.
+
         """
         if self.end < other.start or (
             self.end == other.start and not (self.right_closed or other.left_closed)
@@ -98,20 +97,20 @@ class Interval(Generic[T]):
             return None  # Non-overlapping
 
         new_start = min(
-            (self.start, self.left_closed), (other.start, other.left_closed)
+            (self.start, self.left_closed), (other.start, other.left_closed),
         )
         new_end = max((self.end, self.right_closed), (other.end, other.right_closed))
         return Interval(new_start[0], new_end[0], new_start[1], new_end[1])
 
     def difference(self, other: Interval[T]) -> list[Interval[T]]:
-        """
-        Returns the difference of this interval with another.
+        """Returns the difference of this interval with another.
 
         Args:
             other: The other interval.
 
         Returns:
             list[Interval[T]]: A list of intervals after subtracting the other interval.
+
         """
         if other.start >= self.end or other.end <= self.start:
             # No overlap
@@ -123,18 +122,17 @@ class Interval(Generic[T]):
         ):
             intervals.append(
                 Interval(
-                    self.start, other.start, self.left_closed, not other.left_closed
-                )
+                    self.start, other.start, self.left_closed, not other.left_closed,
+                ),
             )
         if other.end < self.end or (other.end == self.end and not other.right_closed):
             intervals.append(
-                Interval(other.end, self.end, not other.right_closed, self.right_closed)
+                Interval(other.end, self.end, not other.right_closed, self.right_closed),
             )
         return intervals
 
     def complement(self, universe_start: T, universe_end: T) -> list[Interval[T]]:
-        """
-        Returns the complement of this interval within a specified universe.
+        """Returns the complement of this interval within a specified universe.
 
         Args:
             universe_start: Start of the universe.
@@ -145,6 +143,7 @@ class Interval(Generic[T]):
 
         Raises:
             ValueError: If the universe boundaries are invalid.
+
         """
         if universe_start >= universe_end:
             raise ValueError("Universe start must be before universe end.")
@@ -154,19 +153,18 @@ class Interval(Generic[T]):
             self.start == universe_start and not self.left_closed
         ):
             intervals.append(
-                Interval(universe_start, self.start, True, not self.left_closed)
+                Interval(universe_start, self.start, True, not self.left_closed),
             )
         if self.end < universe_end or (
             self.end == universe_end and not self.right_closed
         ):
             intervals.append(
-                Interval(self.end, universe_end, not self.right_closed, True)
+                Interval(self.end, universe_end, not self.right_closed, True),
             )
         return intervals
 
     def __lt__(self, other: Interval[T]) -> bool:
-        """
-        Lexicographic ordering of intervals.
+        """Lexicographic ordering of intervals.
         """
         return (self.start, self.end, self.left_closed, self.right_closed) < (
             other.start,
@@ -182,8 +180,7 @@ class Interval(Generic[T]):
         return self > other or self == other
 
     def __gt__(self, other: Interval[T]) -> bool:
-        """
-        Lexicographic ordering of intervals.
+        """Lexicographic ordering of intervals.
         """
         return (self.start, self.end, self.left_closed, self.right_closed) > (
             other.start,
