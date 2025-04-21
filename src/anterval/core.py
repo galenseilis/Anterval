@@ -133,7 +133,10 @@ class Interval(Generic[T]):
         if other.end < self.end or (other.end == self.end and not other.right_closed):
             intervals.append(
                 Interval(
-                    other.end, self.end, not other.right_closed, self.right_closed,
+                    other.end,
+                    self.end,
+                    not other.right_closed,
+                    self.right_closed,
                 ),
             )
         return intervals
