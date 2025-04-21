@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from typing import Generic, TypeVar, override
+from typing import Final, Generic, TypeVar, override
+
+__all__: Final[list[str]] = ["Interval"]
 
 T = TypeVar("T")
 
