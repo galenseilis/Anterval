@@ -9,7 +9,21 @@ from anterval import Interval
     left_closed=st.booleans(),
     right_closed=st.booleans(),
 )
-def test_int(a, b, left_closed, right_closed):
+def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None:
+    start = min(a, b)
+    end = max(a, b)
+    interval = Interval(
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+    )
+
+
+@given(
+    a=st.text(),
+    b=st.text(),
+    left_closed=st.booleans(),
+    right_closed=st.booleans(),
+)
+def test_text(a: str, b: str, left_closed: bool, right_closed: bool) -> None:
     start = min(a, b)
     end = max(a, b)
     interval = Interval(
