@@ -27,8 +27,6 @@ class Interval(Generic[T]):
             ValueError: If the interval boundaries are invalid.
 
         """
-        if start > end or (start == end and (not left_closed or not right_closed)):
-            raise ValueError("Invalid interval boundaries.")
         self.start: T = start
         self.end: T = end
         self.left_closed: bool = left_closed
