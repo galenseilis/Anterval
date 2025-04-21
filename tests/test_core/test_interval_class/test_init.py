@@ -15,4 +15,3 @@ def test_int(a, b, left_closed, right_closed):
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
-    assert 1 != 2
