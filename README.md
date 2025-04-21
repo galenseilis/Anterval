@@ -1,2 +1,3 @@
-# Daterval
-Intervals of datetime objects.
+# Anterval
+
+Abstract intervals class.
