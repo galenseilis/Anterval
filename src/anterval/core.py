@@ -68,7 +68,8 @@ class Interval(Generic[T]):
 
         """
         new_start = max(
-            (self.start, self.left_closed), (other.start, other.left_closed),
+            (self.start, self.left_closed),
+            (other.start, other.left_closed),
         )
         new_end = min((self.end, self.right_closed), (other.end, other.right_closed))
         if new_start[0] < new_end[0] or (
@@ -97,7 +98,8 @@ class Interval(Generic[T]):
             return None  # Non-overlapping
 
         new_start = min(
-            (self.start, self.left_closed), (other.start, other.left_closed),
+            (self.start, self.left_closed),
+            (other.start, other.left_closed),
         )
         new_end = max((self.end, self.right_closed), (other.end, other.right_closed))
         return Interval(new_start[0], new_end[0], new_start[1], new_end[1])
@@ -122,12 +124,17 @@ class Interval(Generic[T]):
         ):
             intervals.append(
                 Interval(
-                    self.start, other.start, self.left_closed, not other.left_closed,
+                    self.start,
+                    other.start,
+                    self.left_closed,
+                    not other.left_closed,
                 ),
             )
         if other.end < self.end or (other.end == self.end and not other.right_closed):
             intervals.append(
-                Interval(other.end, self.end, not other.right_closed, self.right_closed),
+                Interval(
+                    other.end, self.end, not other.right_closed, self.right_closed,
+                ),
             )
         return intervals
 
@@ -164,8 +171,7 @@ class Interval(Generic[T]):
         return intervals
 
     def __lt__(self, other: Interval[T]) -> bool:
-        """Lexicographic ordering of intervals.
-        """
+        """Lexicographic ordering of intervals."""
         return (self.start, self.end, self.left_closed, self.right_closed) < (
             other.start,
             other.end,
@@ -180,8 +186,7 @@ class Interval(Generic[T]):
         return self > other or self == other
 
     def __gt__(self, other: Interval[T]) -> bool:
-        """Lexicographic ordering of intervals.
-        """
+        """Lexicographic ordering of intervals."""
         return (self.start, self.end, self.left_closed, self.right_closed) > (
             other.start,
             other.end,
