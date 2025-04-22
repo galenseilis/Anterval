@@ -12,12 +12,15 @@ from anterval import Interval
     right_closed=st.booleans(),
 )
 def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None:
+    assert isinstance(a, int)
+    assert isinstance(b, int)
+    assert isinstance(left_closed, bool)
+    assert isinstance(right_closed, bool)
     start = min(a, b)
     end = max(a, b)
     assert isinstance(start, int)
     assert isinstance(end, int)
-    assert isinstance(left_closed, bool)
-    assert isinstance(right_closed, bool)
+    assert start <= end
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
@@ -39,10 +42,15 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
     right_closed=st.booleans(),
 )
 def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> None:
-    start = min(a, b)
-    end = max(a, b)
+    assert isinstance(a, float)
+    assert isinstance(b, float)
     assert isinstance(left_closed, bool)
     assert isinstance(right_closed, bool)
+    start = min(a, b)
+    end = max(a, b)
+    assert isinstance(start, float)
+    assert isinstance(end, float)
+    assert start <= end
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
@@ -66,12 +74,16 @@ def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> No
     right_closed=st.booleans(),
 )
 def test_text(a: str, b: str, left_closed: bool, right_closed: bool) -> None:
+    assert isinstance(a, str)
+    assert isinstance(b, str)
     assert isinstance(left_closed, bool)
     assert isinstance(right_closed, bool)
 
     start = min(a, b)
     end = max(a, b)
 
+    assert isinstance(start, str)
+    assert isinstance(end, str)
     assert start <= end
 
     interval = Interval(
