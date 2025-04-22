@@ -25,7 +25,7 @@ def test_right_closed_is_bool(interval):
 
 
 @given(float_intervals())
-def test_unequal_or_nan(interval):
+def test_start_leq_end_or_nan(interval):
     assert (
         (interval.start <= interval.end)
         or math.isnan(interval.start)
