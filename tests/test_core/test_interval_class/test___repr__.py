@@ -5,6 +5,7 @@ from hypothesis import strategies as st
 
 from anterval import Interval
 
+
 @given(
     a=st.floats(),
     b=st.floats(),

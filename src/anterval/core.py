@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Final, Generic, TypeVar, override
 
+from itertools import product
+
 __all__: Final[list[str]] = ["Interval"]
 
 T = TypeVar("T")
@@ -211,3 +213,14 @@ class Interval(Generic[T]):
             other.left_closed,
             other.right_closed,
         )
+
+    def __add__(self, other: Interval[T]) -> Interval[T]:
+        return Interval(
+            start=self.start + other.start,
+            end=self.end + other.end,
+            left_closed=self.left_closed and other.left_closed,
+            right_closed=self.right_closed and other.right_closed,
+        )
+
+    def __mul__(self, other: Interval[T]) -> Interval[T]:
+        raise NotImplementedError()
