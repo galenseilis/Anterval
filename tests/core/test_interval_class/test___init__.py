@@ -14,11 +14,6 @@ from anterval import Interval
 )
 def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> None:
     """Test if Interval initializes with floats correctly."""
-    assert isinstance(a, float)
-    assert isinstance(b, float)
-    assert isinstance(left_closed, bool)
-    assert isinstance(right_closed, bool)
-
     start = min(a, b)
     end = max(a, b)
     assert isinstance(start, float)
