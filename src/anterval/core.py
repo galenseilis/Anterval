@@ -15,7 +15,8 @@ class Interval(Generic[T]):
         left_closed: bool = True,
         right_closed: bool = False,
     ) -> None:
-        """Initializes the Interval.
+        """
+        Initializes the Interval.
 
         Args:
             start: Start of the interval.
@@ -40,7 +41,8 @@ class Interval(Generic[T]):
         return f"{left_bracket}{self.start}, {self.end}{right_bracket}"
 
     def contains(self, value: T) -> bool:
-        """Checks if a given value is within the interval.
+        """
+        Checks if a given value is within the interval.
 
         Args:
             value: The value to check.
@@ -58,7 +60,8 @@ class Interval(Generic[T]):
         return left_check and right_check
 
     def intersection(self, other: Interval[T]) -> Interval[T] | None:
-        """Returns the intersection of this interval with another.
+        """
+        Returns the intersection of this interval with another.
 
         Args:
             other: The other interval.
@@ -79,7 +82,8 @@ class Interval(Generic[T]):
         return None
 
     def union(self, other: Interval[T]) -> Interval[T] | None:
-        """Returns the union of this interval with another if they overlap or are contiguous.
+        """
+        Returns the union of this interval with another if they overlap or are contiguous.
 
         Args:
             other: The other interval.
@@ -105,7 +109,8 @@ class Interval(Generic[T]):
         return Interval(new_start[0], new_end[0], new_start[1], new_end[1])
 
     def difference(self, other: Interval[T]) -> list[Interval[T]]:
-        """Returns the difference of this interval with another.
+        """
+        Returns the difference of this interval with another.
 
         Args:
             other: The other interval.
@@ -142,7 +147,8 @@ class Interval(Generic[T]):
         return intervals
 
     def complement(self, universe_start: T, universe_end: T) -> list[Interval[T]]:
-        """Returns the complement of this interval within a specified universe.
+        """
+        Returns the complement of this interval within a specified universe.
 
         Args:
             universe_start: Start of the universe.

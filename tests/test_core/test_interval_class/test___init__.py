@@ -1,8 +1,10 @@
 import math
 
-from hypothesis import given, strategies as st
+from hypothesis import given
+from hypothesis import strategies as st
 
 from anterval import Interval
+
 
 @given(
     a=st.floats(),
@@ -12,7 +14,6 @@ from anterval import Interval
 )
 def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> None:
     """Test if Interval initializes with floats correctly."""
-
     assert isinstance(a, float)
     assert isinstance(b, float)
     assert isinstance(left_closed, bool)
@@ -39,6 +40,7 @@ def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> No
     assert (interval.start <= interval.end) or (
         math.isnan(interval.end) and math.isnan(end)
     )
+
 
 @given(
     a=st.integers(),
@@ -73,6 +75,7 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
     assert interval.right_closed == right_closed
     assert interval.start <= interval.end
 
+
 @given(
     a=st.text(),
     b=st.text(),
@@ -81,7 +84,6 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
 )
 def test_text(a: str, b: str, left_closed: bool, right_closed: bool) -> None:
     """Test if Interval initializes with strings correctly."""
-
     # Check that test input data is correct.
     assert isinstance(a, str)
     assert isinstance(b, str)
