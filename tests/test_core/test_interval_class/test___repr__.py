@@ -24,21 +24,20 @@ def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> No
     assert isinstance(end, float)
     assert (start <= end) or (math.isnan(start) or math.isnan(end))
 
+
     # Check that interval is correctly initialized.
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
-    assert isinstance(interval.start, float)
-    assert isinstance(interval.end, float)
-    assert (interval.start == start) or (
-        math.isnan(interval.start) and math.isnan(start)
-    )
-    assert (interval.end == end) or (math.isnan(interval.end) and math.isnan(end))
-    assert interval.left_closed == left_closed
-    assert interval.right_closed == right_closed
-    assert (interval.start <= interval.end) or (
-        math.isnan(interval.end) and math.isnan(end)
-    )
+
+    result = repr(interval)
+
+    left_bracket = "[" if left_closed else "("
+    right_bracket = "]" if right_closed else ")"
+    expected = f"{left_bracket}{start}, {end}{right_bracket}"
+
+    assert result == expected
+
 
 @given(
     a=st.integers(),
@@ -63,15 +62,15 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
 
-    assert isinstance(interval.start, int)
-    assert isinstance(interval.end, int)
-    assert isinstance(interval.left_closed, bool)
-    assert isinstance(interval.right_closed, bool)
-    assert interval.start == start
-    assert interval.end == end
-    assert interval.left_closed == left_closed
-    assert interval.right_closed == right_closed
-    assert interval.start <= interval.end
+
+    result = repr(interval)
+
+    left_bracket = "[" if left_closed else "("
+    right_bracket = "]" if right_closed else ")"
+    expected = f"{left_bracket}{start}, {end}{right_bracket}"
+
+    assert result == expected
+
 
 @given(
     a=st.text(),
@@ -100,9 +99,12 @@ def test_text(a: str, b: str, left_closed: bool, right_closed: bool) -> None:
     interval = Interval(
         start=start, end=end, left_closed=left_closed, right_closed=right_closed
     )
-    assert interval.start == start
-    assert interval.end == end
-    assert interval.start <= interval.end
-    assert interval.left_closed == left_closed
-    assert interval.right_closed == right_closed
-    assert interval.start <= interval.end
+
+
+    result = repr(interval)
+
+    left_bracket = "[" if left_closed else "("
+    right_bracket = "]" if right_closed else ")"
+    expected = f"{left_bracket}{start}, {end}{right_bracket}"
+
+    assert result == expected
