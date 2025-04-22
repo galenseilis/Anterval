@@ -1,11 +1,13 @@
 from hypothesis import given
-from anterval.testing.hypothesis.strategies import text_intervals
+
 from anterval import Interval
+from anterval.testing.hypothesis.strategies import text_intervals
 
 
 @given(text_intervals())
 def test_is_interval(interval: Interval) -> None:
     assert isinstance(interval, Interval)
+
 
 @given(text_intervals())
 def test_start_is_int(interval: Interval) -> None:

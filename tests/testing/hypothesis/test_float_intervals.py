@@ -1,6 +1,7 @@
 import math
 
 from hypothesis import given
+
 from anterval.testing.hypothesis.strategies import float_intervals
 
 

@@ -1,5 +1,7 @@
-from hypothesis import given
 import datetime
+
+from hypothesis import given
+
 from anterval.testing.hypothesis.strategies import datetime_intervals
 
 

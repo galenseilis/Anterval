@@ -2,7 +2,6 @@ import math
 
 from hypothesis import given
 from hypothesis import strategies as st
-from anterval.testing.hypothesis.strategies import float_intervals, int_intervals, text_intervals
 
 from anterval import Interval
 
@@ -28,5 +27,5 @@ def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> No
 
     # Check that interval is correctly initialized.
     interval = Interval(
-        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed,
     )

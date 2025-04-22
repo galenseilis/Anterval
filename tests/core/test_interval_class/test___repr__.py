@@ -27,7 +27,7 @@ def test_floats(a: float, b: float, left_closed: bool, right_closed: bool) -> No
 
     # Check that interval is correctly initialized.
     interval = Interval(
-        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed,
     )
 
     result = repr(interval)
@@ -59,7 +59,7 @@ def test_integers(a: int, b: int, left_closed: bool, right_closed: bool) -> None
     assert start <= end
 
     interval = Interval(
-        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed,
     )
 
     result = repr(interval)
@@ -95,7 +95,7 @@ def test_text(a: str, b: str, left_closed: bool, right_closed: bool) -> None:
 
     # Check that interval is correctly initialized.
     interval = Interval(
-        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed,
     )
 
     result = repr(interval)

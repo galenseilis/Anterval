@@ -1,5 +1,7 @@
 from hypothesis import strategies as st
+
 from anterval import Interval
+
 
 @st.composite
 def float_intervals(draw) -> Interval:
@@ -11,8 +13,9 @@ def float_intervals(draw) -> Interval:
     left_closed = draw(st.booleans())
     right_closed = draw(st.booleans())
     return Interval(
-        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed,
     )
+
 
 @st.composite
 def int_intervals(draw) -> Interval:
@@ -22,8 +25,9 @@ def int_intervals(draw) -> Interval:
     left_closed = draw(st.booleans())
     right_closed = draw(st.booleans())
     return Interval(
-        start=n1, end=n2, left_closed=left_closed, right_closed=right_closed
+        start=n1, end=n2, left_closed=left_closed, right_closed=right_closed,
     )
+
 
 @st.composite
 def text_intervals(draw) -> Interval:
@@ -35,7 +39,7 @@ def text_intervals(draw) -> Interval:
     left_closed = draw(st.booleans())
     right_closed = draw(st.booleans())
     return Interval(
-        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed,
     )
 
 
@@ -49,5 +53,5 @@ def datetime_intervals(draw) -> Interval:
     left_closed = draw(st.booleans())
     right_closed = draw(st.booleans())
     return Interval(
-        start=start, end=end, left_closed=left_closed, right_closed=right_closed
+        start=start, end=end, left_closed=left_closed, right_closed=right_closed,
     )
