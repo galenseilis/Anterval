@@ -32,15 +32,27 @@ exclude = [
 line-length = 88
 indent-width = 4
 
-# Assume Python 3.9
-target-version = "py39"
+# Target the minimum supported version (see `requires-python`).
+target-version = "py312"
 
 [lint]
 # Enable Pyflakes (`F`) and a subset of the pycodestyle (`E`)  codes by default.
 # Unlike Flake8, Ruff doesn't enable pycodestyle warnings (`W`) or
 # McCabe complexity (`C901`) by default.
 select = ["ALL"]
-ignore = ["D211", "D212", "COM812", "D203"]
+ignore = [
+    "COM812",  # conflicts with the formatter
+    "CPY001",  # no copyright header required
+    "D203",    # conflicts with D211
+    "D211",    # allow a summary line followed by a blank line
+    "D212",    # allow multi-line summaries
+    "D213",    # conflicts with D212
+    "D401",    # imperative-mood summaries are not enforced
+    "EM101",   # exception message style
+    "FBT001",  # boolean flags are part of the public Interval API
+    "FBT002",
+    "TRY003",  # exception message style
+]
 
 # Allow fix for all enabled rules (when `--fix`) is provided.
 fixable = ["ALL"]
@@ -48,6 +60,25 @@ unfixable = []
 
 # Allow unused variables when underscore-prefixed.
 dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[lint.per-file-ignores]
+# Tests are allowed to use bare `assert`s and to omit docstrings/annotations.
+"tests/**" = [
+    "ANN001",
+    "ANN201",
+    "ANN202",
+    "B015",    # comparisons are often the code under test
+    "D100",
+    "D103",
+    "D104",
+    "CPY001",
+    "FBT003",  # positional booleans exercise the Interval constructor
+    "ICN001",
+    "INP001",
+    "PLR0124",  # self-comparisons assert reflexivity
+    "PLR2004",  # literal values keep tests readable
+    "S101",
+]
 
 [format]
 # Like Black, use double quotes for strings.

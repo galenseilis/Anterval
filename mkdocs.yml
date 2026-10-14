@@ -1,0 +1,64 @@
+site_name: Anterval
+site_description: Abstract interval class for arbitrary totally ordered types
+site_url: https://galenseilis.github.io/Anterval/
+repo_url: https://github.com/galenseilis/Anterval
+repo_name: galenseilis/Anterval
+
+theme:
+  name: material
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+
+nav:
+  - Home: index.md
+  - Tutorials:
+      - Getting Started: tutorials/getting-started.md
+  - How-To Guides:
+      - Basic Operations: how-to/basic-operations.md
+      - Set Operations: how-to/set-operations.md
+      - Property-Based Testing: how-to/property-testing.md
+  - Reference:
+      - API Reference: reference/api.md
+  - Explanation:
+      - Interval Semantics: explanation/semantics.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.highlight
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - attr_list
+  - md_in_html
+
+plugins:
+  - mkdocstrings:
+      handlers:
+        python:
+          options:
+            show_source: false
+            show_root_heading: true
+            show_root_toc_entry: false
+            docstring_style: google
+            merge_init_into_class: true
+  - search

@@ -4,4 +4,32 @@ version = "0.1.0"
 description = "Abstract interval class."
 readme = "README.md"
 requires-python = ">=3.12"
+license = { text = "Apache-2.0" }
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/galenseilis/Anterval"
+Documentation = "https://galenseilis.github.io/Anterval/"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[dependency-groups]
+dev = [
+    "hypothesis>=6.100",
+    "pytest>=8.0",
+    "ruff>=0.6",
+]
+docs = [
+    "mkdocs>=1.6",
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.26",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/anterval"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
